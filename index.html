@@ -23,6 +23,19 @@
 
     <!-- Контейнер для карточек, которые генерирует JS -->
     <div class="skills-container"></div>
+    <div class="calculator">
+        <h3>Мини-калькулятор</h3>
+        <input type="number" id="num1" placeholder="Число 1">
+        <input type="number" id="num2" placeholder="Число 2">
+        <div class="buttons">
+            <button onclick="calculate('+')">+</button>
+            <button onclick="calculate('-')">-</button>
+            <button onclick="calculate('*')">*</button>
+            <button onclick="calculate('/')">/</button>
+        </div>
+        <h4 id="result">Результат: 0</h4>
+    </div>
+    
 
     <div class="about">
         <p>Я будущий <strong>веб-разработчик</strong>. Сейчас я прохожу обучение с наставником.</p>
