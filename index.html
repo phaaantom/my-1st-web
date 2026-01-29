@@ -8,49 +8,57 @@
 </head>
 <body>
 
-    <div class="controls">
+    <header class="controls">
         <button class="theme-btn">🌓 Сменить тему</button>
         <button onclick="changeAllCards()">🎨 Перекрасить всё!</button>
-    </div>
+    </header>
 
-    <h1 class="main-title">Phantom</h1>
-    
-    <hr>
-    
-    <div class="profile">
-        <img src="my-photo.jpeg" alt="Мое фото" width="150">
-    </div>
-
-    <!-- Контейнер для карточек, которые генерирует JS -->
-    <div class="skills-container"></div>
-    <div class="calculator">
-        <h3>Мини-калькулятор</h3>
-        <input type="number" id="num1" placeholder="Число 1">
-        <input type="number" id="num2" placeholder="Число 2">
-        <div class="buttons">
-            <button onclick="calculate('+')">+</button>
-            <button onclick="calculate('-')">-</button>
-            <button onclick="calculate('*')">*</button>
-            <button onclick="calculate('/')">/</button>
+    <main>
+        <h1 class="main-title">Phantom</h1>
+        
+        <hr>
+        
+        <div class="profile">
+            <!-- Проверь, чтобы файл my-photo.jpeg лежал в той же папке -->
+            <img src="my-photo.jpeg" alt="Мое фото" width="150">
         </div>
-        <h4 id="result">Результат: 0</h4>
-    </div>
-    
 
-    <div class="about">
-        <p>Я будущий <strong>веб-разработчик</strong>. Сейчас я прохожу обучение с наставником.</p>
-        <p><a href="https://t.me/phantom_1912" target="_blank">✈️ Мой телеграм</a></p>
-    </div>
+        <!-- Контейнер для карточек (заполняется через JS) -->
+        <div class="skills-container"></div>
 
-    <h3>Мои цели на этот курс:</h3>
-    <ul>
-        <li>Научиться верстать сайты</li>
-        <li>Понять, как работает JavaScript</li>
-        <li>Создать свой первый крутой проект</li>
-    </ul>
+        <!-- Секция калькулятора -->
+        <section class="calculator-section">
+            <div class="calculator">
+                <h3>Мини-калькулятор</h3>
+                <div class="inputs">
+                    <input type="number" id="num1" placeholder="Число 1">
+                    <input type="number" id="num2" placeholder="Число 2">
+                </div>
+                <div class="buttons">
+                    <button onclick="calculate('+')">+</button>
+                    <button onclick="calculate('-')">-</button>
+                    <button onclick="calculate('*')">*</button>
+                    <button onclick="calculate('/')">/</button>
+                </div>
+                <h4 id="result">Результат: 0</h4>
+            </div>
+        </section>
 
-    <!-- Скрипт в самом конце перед закрывающим body -->
+        <section class="about">
+            <p>Я будущий <strong>веб-разработчик</strong>. Сейчас я прохожу обучение с наставником.</p>
+            <p><a href="https://t.me/phantom_1912" target="_blank" rel="noopener">✈️ Мой телеграм</a></p>
+        </section>
+
+        <section class="goals">
+            <h3>Мои цели на этот курс:</h3>
+            <ul>
+                <li>Научиться верстать сайты</li>
+                <li>Понять, как работает JavaScript</li>
+                <li>Создать свой первый крутой проект</li>
+            </ul>
+        </section>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
-

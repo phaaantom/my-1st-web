@@ -1,11 +1,29 @@
-// Оборачиваем всё в DOMContentLoaded, чтобы JS ждал загрузки HTML
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. ГЕНЕРАЦИЯ КАРТОЧЕК ---
+    // --- 1. ПРИВЕТСТВИЕ И ПАМЯТЬ ---
+    function askName() {
+        let savedName = localStorage.getItem('userName');
+        const title = document.querySelector('h1');
+    
+        if (savedName && title) {
+            title.textContent = "С возвращением, " + savedName + "!";
+        } else if (title) {
+            let userName = prompt("Как тебя зовут, юный падаван?");
+            if (userName) {
+                localStorage.setItem('userName', userName);
+                title.textContent = "Привет, " + userName + "!";
+            }
+        }
+    }
+    // ВАЖНО: вызываем функцию сразу при загрузке!
+    askName();
+
+    // --- 2. ГЕНЕРАЦИЯ КАРТОЧЕК ---
     const mySkills = ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Terminal"];
     const container = document.querySelector('.skills-container');
 
     if (container) {
+        container.innerHTML = ""; // Очищаем на случай дублей
         mySkills.forEach(skill => {
             const newCard = document.createElement('div');
             newCard.classList.add('skill-card');
@@ -14,68 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. ПРИВЕТСТВИЕ ---
-    function askName() {
-        // 1. Проверяем, есть ли уже имя в памяти
-        let savedName = localStorage.getItem('userName');
-        const title = document.querySelector('h1');
-    
-        if (savedName) {
-            // Если имя есть — просто здороваемся
-            title.textContent = "С возвращением, " + savedName + "!";
-        } else {
-            // Если имени нет — спрашиваем и СОХРАНЯЕМ
-            let userName = prompt("Как тебя зовут, юный падаван?");
-            if (userName) {
-                localStorage.setItem('userName', userName); // Вот тут магия сохранения
-                title.textContent = "Привет, " + userName + "!";
-            }
-        }
-    }
-
     // --- 3. ТЕМНАЯ ТЕМА ---
     const btn = document.querySelector('.theme-btn');
     if (btn) {
         btn.addEventListener('click', function() {
-            // Используем класс-переключатель вместо проверки цвета — это надежнее
-            document.body.classList.toggle('dark-theme');
-            
-            // Если хочешь оставить именно через стили:
+            // Простая и надежная логика смены цветов
             if (document.body.style.backgroundColor === 'rgb(51, 51, 51)') {
                 document.body.style.backgroundColor = '#e0e5ec';
                 document.body.style.color = '#000';
             } else {
-                document.body.style.backgroundColor = '#333';
+                document.body.style.backgroundColor = 'rgb(51, 51, 51)';
                 document.body.style.color = '#fff';
             }
         });
     }
 });
 
-// --- 4. ФУНКЦИЯ ПЕРЕКРАСКИ (вынесена из DOMContentLoaded, так как вызывается из HTML) ---
-function changeAllCards() {
-    const allCards = document.querySelectorAll('.skill-card');
-    allCards.forEach(card => {
-        card.style.backgroundColor = 'red';
-    });
-}
-function calculate(operator) {
-    // Получаем значения из полей ввода и превращаем их в числа
-    const n1 = parseFloat(document.getElementById('num1').value);
-    const n2 = parseFloat(document.getElementById('num2').value);
-    const resultElement = document.getElementById('result');
-
-    // Проверяем, ввел ли пользователь числа
-    if (isNaN(n1) || isNaN(n2)) {
-        resultElement.textContent = "Введите оба числа!";
-        return;
-    }
-
-    let res;
-    if (operator === '+') res = n1 + n2;
-    if (operator === '-') res = n1 - n2;
-    if (operator === '*') res = n1 * n2;
-    if (operator === '/') res = n1 / n2;
-
-    resultElement.textContent = "Результат: " + res;
-}
+// Функцию calculate и changeAllCards оставь ВНЕ блока DOMContentLoaded, 
+// чтобы их видел HTML (через onclick)
