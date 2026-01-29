@@ -27,8 +27,10 @@ body {
 }
 
 .skill-card {
-    background: #4a90e2;
-    color: linear-gradient(45deg, #4a90e2, #9013fe);
+    background: linear-gradient(45deg, #4a90e2, #9013fe); /* Градиент от синего к фиолетовому */
+    color: white
+    ;
+    color: blueviolet;
     padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
