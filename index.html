@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
-    <title>Моя Визитка</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя Визитка | Phantom</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="theme-btn">Сменить тему</button>
-    <button onclick="changeAllCards()">Перекрасить всё!</button>
-    <div class="skills-container">
-        <div class="skill-card">HTML</div>
-        <div class="skill-card">CSS</div>
-        <div class="skill-card">JS (Скоро)</div>
-        <div class="skill-card">react</div>
-        <div class="skill-card">node</div>
-        <div class="skill-card">git</div>
-    </div>    
-<b>
-    <!-- Здесь будет твое Имя -->
-    <h1 class="main-title">phantom</h1>
-    <h1>[Phantom]</h1>
-    <hr>
-    <img src="my-photo.jpeg" alt="Мое фото" width="150">
 
-</b>
-    <!-- Коротко о тебе -->
-    <p>Я будущий <strong>веб-разработчик</strong>. Сейчас я прохожу обучение с наставником.</p>
-<p><a href="https://t.me/phantom_1912">Мой телеграм</a></p>
+    <div class="controls">
+        <button class="theme-btn">🌓 Сменить тему</button>
+        <button onclick="changeAllCards()">🎨 Перекрасить всё!</button>
+    </div>
+
+    <h1 class="main-title">Phantom</h1>
+    
+    <hr>
+    
+    <div class="profile">
+        <img src="my-photo.jpeg" alt="Мое фото" width="150">
+    </div>
+
+    <!-- Контейнер для карточек, которые генерирует JS -->
+    <div class="skills-container"></div>
+
+    <div class="about">
+        <p>Я будущий <strong>веб-разработчик</strong>. Сейчас я прохожу обучение с наставником.</p>
+        <p><a href="https://t.me/phantom_1912" target="_blank">✈️ Мой телеграм</a></p>
+    </div>
+
     <h3>Мои цели на этот курс:</h3>
     <ul>
-        <!-- Давай заполним список вместе -->
         <li>Научиться верстать сайты</li>
         <li>Понять, как работает JavaScript</li>
         <li>Создать свой первый крутой проект</li>
     </ul>
-    <script src="script.js"></script>
 
+    <!-- Скрипт в самом конце перед закрывающим body -->
+    <script src="script.js"></script>
 </body>
 </html>
+
