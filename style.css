@@ -1,82 +1,116 @@
-.main-title {
-    color: #2c3e50;       /* Цвет текста */
-    text-align: center;   /* Текст по центру */
-    font-family: Arial;    /* Шрифт */
-    text-transform: uppercase; /* Все буквы заглавные */
-}
-
+/* 1. ОБЩИЕ СТИЛИ СТРАНИЦЫ */
 body {
-    background-color: #f4f4f4; /* Цвет фона всей страницы */
-    padding: 50px;             /* Отступы от краев */
-}
-body {
-    background-color: #e0e5ec; /* Современный светло-серый */
+    background-color: #e0e5ec; /* Приятный серый фон */
     font-family: 'Segoe UI', Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Выравниваем всё по центру */
+    align-items: center;
+    padding: 40px 20px;
+    margin: 0;
+    transition: background 0.3s, color 0.3s; /* Плавная смена темы */
 }
 
 .main-title {
-    color: #333;
-    margin-bottom: 10px; /* Отступ снизу */
+    color: #2c3e50;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
-p {
-    color: #555;
-    background: white;
-    padding: 20px;       /* Воздух внутри блока */
-    border-radius: 50px; /* Скругляем углы */
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1); /* Легкая тень */
-    max-width: 400px;
-}
-/* Контейнер, который управляет карточками */
+/* 2. КАРТОЧКИ НАВЫКОВ */
 .skills-container {
-    display: flex;        /* Включаем Flexbox */
-    gap: 20px;           /* Расстояние между карточками */
-    justify-content: space-between; /* Центрируем карточки по горизонтали */
-    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap; /* Чтобы карточки переносились на мобилках */
+    gap: 15px;
+    justify-content: center;
+    margin: 30px 0;
 }
 
-/* Стили для самих карточек */
 .skill-card {
     background: #4a90e2;
     color: white;
-    padding: 15px 25px;
+    padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
-    transition: 0.3s; /* Чтобы плавно менялось при наведении */
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Эффект при наведении мышки */
 .skill-card:hover {
     background: #357abd;
-    transform: translateY(-5px); /* Карточка «подпрыгивает» */
+    transform: translateY(-5px);
     cursor: pointer;
 }
-/* Если ширина экрана меньше 600px (мобилки) */
-@media (max-width: 600px) {
-    .skills-container {
-        flex-direction: column; /* Карточки встанут в колонку, друг под друга */
-        align-items: center;
-    }
-    
-    .skill-card {
-        width: 80%; /* Карточки станут широкими на весь экран */
-        text-align: center;
-    }
+
+/* 3. КАЛЬКУЛЯТОР И КНОПКИ */
+.calculator, .todo-section, .about {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 400px;
+    color: #333;
 }
-.completed span {
-    text-decoration: line-through;
-    opacity: 0.6;
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #4a90e2;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 5px;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: calc(100% - 22px);
+}
+
+/* 4. СПИСОК ЗАДАЧ (TO-DO) */
+#todo-list {
+    list-style: none;
+    padding: 0;
 }
 
 #todo-list li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    background: white;
+    align-items: center;
     padding: 10px;
-    border-radius: 5px;
-    color: black;
+    border-bottom: 1px solid #eee;
 }
+
+.completed span {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.delete-btn {
+    background: #ff4757;
+    padding: 5px 10px;
+}
+
+/* 5. АДАПТИВНОСТЬ */
+@media (max-width: 600px) {
+    .skills-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .skill-card {
+        width: 100%;
+        text-align: center;
+    }
+}
+

@@ -1,82 +1,121 @@
-document.addEventListener('DOMContentLoaded', () => {
+// 1. ФУНКЦИИ ДЛЯ КНОПОК (Глобальные)
+function calculate(operator) {
+    const n1 = parseFloat(document.getElementById('num1').value);
+    const n2 = parseFloat(document.getElementById('num2').value);
+    const resultElement = document.getElementById('result');
 
-    // --- 1. ПРИВЕТСТВИЕ И ПАМЯТЬ ---
-    function askName() {
-        let savedName = localStorage.getItem('userName');
-        const title = document.querySelector('h1');
-    
-        if (savedName && title) {
-            title.textContent = "С возвращением, " + savedName + "!";
-        } else if (title) {
-            let userName = prompt("Как тебя зовут, юный падаван?");
-            if (userName) {
-                localStorage.setItem('userName', userName);
-                title.textContent = "Привет, " + userName + "!";
-            }
-        }
-    }
-    // ВАЖНО: вызываем функцию сразу при загрузке!
-    askName();
-
-    // --- 2. ГЕНЕРАЦИЯ КАРТОЧЕК ---
-    const mySkills = ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Terminal"];
-    const container = document.querySelector('.skills-container');
-
-    if (container) {
-        container.innerHTML = ""; // Очищаем на случай дублей
-        mySkills.forEach(skill => {
-            const newCard = document.createElement('div');
-            newCard.classList.add('skill-card');
-            newCard.textContent = skill;
-            container.appendChild(newCard);
-        });
-    }
-
-    // --- 3. ТЕМНАЯ ТЕМА ---
-    const btn = document.querySelector('.theme-btn');
-    if (btn) {
-        btn.addEventListener('click', function() {
-            // Простая и надежная логика смены цветов
-            if (document.body.style.backgroundColor === 'rgb(51, 51, 51)') {
-                document.body.style.backgroundColor = '#e0e5ec';
-                document.body.style.color = '#000';
-            } else {
-                document.body.style.backgroundColor = 'rgb(51, 51, 51)';
-                document.body.style.color = '#fff';
-            }
-        });
-    }
-});
-
-// Функцию calculate и changeAllCards оставь ВНЕ блока DOMContentLoaded, 
-// чтобы их видел HTML (через onclick)
-function addTask() {
-    const input = document.getElementById('todo-input');
-    const list = document.getElementById('todo-list');
-    const taskText = input.value.trim();
-
-    if (taskText === "") {
-        alert("Напиши хоть что-нибудь!");
+    if (isNaN(n1) || isNaN(n2)) {
+        resultElement.textContent = "Введите числа!";
         return;
     }
 
-    // 1. Создаем элемент списка (li)
-    const li = document.createElement('li');
-    li.innerHTML = `
-        <span>${taskText}</span>
-        <button class="delete-btn" onclick="this.parentElement.remove()">❌</button>
-    `;
+    let res;
+    if (operator === '+') res = n1 + n2;
+    if (operator === '-') res = n1 - n2;
+    if (operator === '*') res = n1 * n2;
+    if (operator === '/') res = (n2 === 0) ? "На 0 нельзя!" : n1 / n2;
 
-    // 2. Добавляем возможность отмечать задачу как выполненную
-    li.addEventListener('click', function(e) {
-        if (e.target.tagName !== 'BUTTON') {
-            li.classList.toggle('completed');
-        }
+    resultElement.textContent = "Результат: " + res;
+}
+
+function changeAllCards() {
+    const allCards = document.querySelectorAll('.skill-card');
+    allCards.forEach(card => {
+        card.style.backgroundColor = 'red';
     });
+}
 
-    // 3. Кидаем в список
-    list.appendChild(li);
-    
-    // 4. Очищаем поле ввода
+function addTask() {
+    const input = document.getElementById('todo-input');
+    const list = document.getElementById('todo-list');
+    if (!input.value.trim()) return;
+
+    createTaskElement(input.value);
+    saveTasks(); // Сохраняем в память
     input.value = "";
 }
+
+// Вспомогательная функция для создания LI
+function createTaskElement(text, isCompleted = false) {
+    const list = document.getElementById('todo-list');
+    const li = document.createElement('li');
+    if (isCompleted) li.classList.add('completed');
+    
+    li.innerHTML = `
+        <span>${text}</span>
+        <button class="delete-btn">❌</button>
+    `;
+
+    // Удаление
+    li.querySelector('.delete-btn').onclick = () => {
+        li.remove();
+        saveTasks();
+    };
+
+    // Выполнено
+    li.onclick = (e) => {
+        if (e.target.tagName !== 'BUTTON') {
+            li.classList.toggle('completed');
+            saveTasks();
+        }
+    };
+
+    list.appendChild(li);
+}
+
+// 2. РАБОТА С ПАМЯТЬЮ (LocalStorage)
+function saveTasks() {
+    const tasks = [];
+    document.querySelectorAll('#todo-list li').forEach(li => {
+        tasks.push({
+            text: li.querySelector('span').textContent,
+            completed: li.classList.contains('completed')
+        });
+    });
+    localStorage.setItem('myTasks', JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    const saved = JSON.parse(localStorage.getItem('myTasks') || "[]");
+    saved.forEach(t => createTaskElement(t.text, t.completed));
+}
+
+// 3. ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
+document.addEventListener('DOMContentLoaded', () => {
+    // Приветствие
+    let savedName = localStorage.getItem('userName');
+    const title = document.querySelector('h1');
+    if (savedName) {
+        title.textContent = "С возвращением, " + savedName + "!";
+    } else {
+        let name = prompt("Как тебя зовут?");
+        if (name) {
+            localStorage.setItem('userName', name);
+            title.textContent = "Привет, " + name + "!";
+        }
+    }
+
+    // Карточки
+    const mySkills = ["HTML", "CSS", "JS", "Git", "GitHub", "Terminal"];
+    const container = document.querySelector('.skills-container');
+    if (container) {
+        mySkills.forEach(s => {
+            const div = document.createElement('div');
+            div.className = 'skill-card';
+            div.textContent = s;
+            container.appendChild(div);
+        });
+    }
+
+    // Загрузка задач из памяти
+    loadTasks();
+
+    // Тема
+    const btn = document.querySelector('.theme-btn');
+    btn.onclick = () => {
+        const isDark = document.body.style.backgroundColor === 'rgb(51, 51, 51)';
+        document.body.style.backgroundColor = isDark ? '#e0e5ec' : 'rgb(51, 51, 51)';
+        document.body.style.color = isDark ? '#000' : '#fff';
+    };
+});
+
