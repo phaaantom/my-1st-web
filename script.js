@@ -96,16 +96,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Карточки
-    const mySkills = ["HTML", "CSS", "JS", "Git", "GitHub", "Terminal"];
-    const container = document.querySelector('.skills-container');
-    if (container) {
-        mySkills.forEach(s => {
-            const div = document.createElement('div');
-            div.className = 'skill-card';
-            div.textContent = s;
-            container.appendChild(div);
-        });
-    }
+ // 1. Создаем список объектов: название + класс иконки
+const mySkills = [
+    { name: "HTML", icon: "fab fa-html5" },
+    { name: "CSS", icon: "fab fa-css3-alt" },
+    { name: "JavaScript", icon: "fab fa-js-square" },
+    { name: "Git", icon: "fab fa-git-alt" },
+    { name: "GitHub", icon: "fab fa-github" },
+    { name: "Terminal", icon: "fas fa-terminal" }
+];
+
+const container = document.querySelector('.skills-container');
+
+if (container) {
+    container.innerHTML = ""; // Очистка
+    mySkills.forEach(skill => {
+        const newCard = document.createElement('div');
+        newCard.classList.add('skill-card');
+        
+        // Вставляем иконку и текст через innerHTML
+        newCard.innerHTML = `<i class="${skill.icon}"></i> ${skill.name}`;
+        
+        container.appendChild(newCard);
+    });
+}
 
     // Загрузка задач из памяти
     loadTasks();

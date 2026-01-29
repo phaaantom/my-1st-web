@@ -115,3 +115,7 @@ input {
         text-align: center;
     }
 }
+.skill-card i {
+    margin-right: 10px; /* Отступ справа от иконки */
+    font-size: 1.2em;   /* Сделаем иконку чуть крупнее */
+}
