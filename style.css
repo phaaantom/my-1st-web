@@ -28,7 +28,7 @@ body {
 
 .skill-card {
     background: #4a90e2;
-    color: white;
+    color: linear-gradient(45deg, #4a90e2, #9013fe);
     padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
@@ -113,4 +113,3 @@ input {
         text-align: center;
     }
 }
-
