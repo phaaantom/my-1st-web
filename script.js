@@ -15,10 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 2. ПРИВЕТСТВИЕ ---
-    const title = document.querySelector('h1');
-    let userName = prompt("Как тебя зовут, юный падаван?");
-    if (userName && title) {
-        title.textContent = "Привет, " + userName + "!";
+    function askName() {
+        // 1. Проверяем, есть ли уже имя в памяти
+        let savedName = localStorage.getItem('userName');
+        const title = document.querySelector('h1');
+    
+        if (savedName) {
+            // Если имя есть — просто здороваемся
+            title.textContent = "С возвращением, " + savedName + "!";
+        } else {
+            // Если имени нет — спрашиваем и СОХРАНЯЕМ
+            let userName = prompt("Как тебя зовут, юный падаван?");
+            if (userName) {
+                localStorage.setItem('userName', userName); // Вот тут магия сохранения
+                title.textContent = "Привет, " + userName + "!";
+            }
+        }
     }
 
     // --- 3. ТЕМНАЯ ТЕМА ---
