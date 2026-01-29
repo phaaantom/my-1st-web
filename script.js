@@ -50,3 +50,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Функцию calculate и changeAllCards оставь ВНЕ блока DOMContentLoaded, 
 // чтобы их видел HTML (через onclick)
+function addTask() {
+    const input = document.getElementById('todo-input');
+    const list = document.getElementById('todo-list');
+    const taskText = input.value.trim();
+
+    if (taskText === "") {
+        alert("Напиши хоть что-нибудь!");
+        return;
+    }
+
+    // 1. Создаем элемент списка (li)
+    const li = document.createElement('li');
+    li.innerHTML = `
+        <span>${taskText}</span>
+        <button class="delete-btn" onclick="this.parentElement.remove()">❌</button>
+    `;
+
+    // 2. Добавляем возможность отмечать задачу как выполненную
+    li.addEventListener('click', function(e) {
+        if (e.target.tagName !== 'BUTTON') {
+            li.classList.toggle('completed');
+        }
+    });
+
+    // 3. Кидаем в список
+    list.appendChild(li);
+    
+    // 4. Очищаем поле ввода
+    input.value = "";
+}
