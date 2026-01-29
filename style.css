@@ -116,6 +116,9 @@ input {
     }
 }
 .skill-card i {
-    margin-right: 10px; /* Отступ справа от иконки */
-    font-size: 1.2em;   /* Сделаем иконку чуть крупнее */
+    margin-right: 12px;
+    font-size: 1.3em;
+    color: #ffda79; /* Приятный золотистый цвет для иконок */
+    text-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
+
