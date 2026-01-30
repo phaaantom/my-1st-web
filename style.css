@@ -1,13 +1,13 @@
 /* 1. ОБЩИЕ СТИЛИ СТРАНИЦЫ */
 body {
-    background-color: #e0e5ec; /* Приятный серый фон */
+    background-color: #e0e5ec;
     font-family: 'Segoe UI', Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 40px 20px;
     margin: 0;
-    transition: background 0.3s, color 0.3s; /* Плавная смена темы */
+    transition: background 0.3s, color 0.3s;
 }
 
 .main-title {
@@ -20,32 +20,54 @@ body {
 /* 2. КАРТОЧКИ НАВЫКОВ */
 .skills-container {
     display: flex;
-    flex-wrap: wrap; /* Чтобы карточки переносились на мобилках */
+    flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
     margin: 30px 0;
 }
 
 .skill-card {
-    background: linear-gradient(45deg, #4a90e2, #9013fe); /* Градиент от синего к фиолетовому */
-    color: white
-    ;
-    color: blueviolet;
+    background: linear-gradient(45deg, #4a90e2, #9013fe);
+    color: white; /* Исправлено: только белый текст */
     padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
     transition: 0.3s;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    opacity: 0; /* Изначально скрыты для анимации */
 }
 
 .skill-card:hover {
-    background: #357abd;
     transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
     cursor: pointer;
 }
 
-/* 3. КАЛЬКУЛЯТОР И КНОПКИ */
-.calculator, .todo-section, .about {
+.skill-card i {
+    margin-right: 12px;
+    font-size: 1.3em;
+    color: #ffda79;
+    text-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* 3. АНИМАЦИЯ (Вынесена из media запроса) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* 4. БЛОКИ КОНТЕНТА */
+.calculator, .todo-section, .about, .goals {
     background: white;
     padding: 20px;
     border-radius: 15px;
@@ -54,6 +76,11 @@ body {
     width: 100%;
     max-width: 400px;
     color: #333;
+    transition: transform 0.3s ease;
+}
+
+.calculator:hover, .todo-section:hover {
+    transform: translateY(-3px);
 }
 
 button {
@@ -64,11 +91,6 @@ button {
     color: white;
     cursor: pointer;
     transition: 0.2s;
-    margin: 5px;
-}
-
-button:hover {
-    filter: brightness(1.1);
 }
 
 input {
@@ -76,49 +98,29 @@ input {
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 10px;
-    width: calc(100% - 22px);
+    width: calc(100% - 24px);
 }
 
-/* 4. СПИСОК ЗАДАЧ (TO-DO) */
-#todo-list {
-    list-style: none;
-    padding: 0;
-}
-
+/* 5. TO-DO LIST */
+#todo-list { list-style: none; padding: 0; }
 #todo-list li {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #eee;
 }
+.completed span { text-decoration: line-through; opacity: 0.5; }
 
-.completed span {
-    text-decoration: line-through;
-    opacity: 0.5;
-}
-
-.delete-btn {
-    background: #ff4757;
-    padding: 5px 10px;
-}
-
-/* 5. АДАПТИВНОСТЬ */
+/* 6. АДАПТИВНОСТЬ */
 @media (max-width: 600px) {
     .skills-container {
         flex-direction: column;
         align-items: center;
     }
-    
     .skill-card {
-        width: 100%;
+        width: 80%;
         text-align: center;
     }
 }
-.skill-card i {
-    margin-right: 12px;
-    font-size: 1.3em;
-    color: #ffda79; /* Приятный золотистый цвет для иконок */
-    text-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
+
 
