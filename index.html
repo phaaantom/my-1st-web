@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Моя Визитка | Phantom</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- 1. ПОДКЛЮЧАЕМ СТИЛИ АНИМАЦИИ AOS (Исправлено) -->
+    <link href="https://unpkg.com" rel="stylesheet">
+    
+    <!-- 2. ПОДКЛЮЧАЕМ ИКОНКИ (Исправлено) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
-
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -17,21 +22,18 @@
 
     <main>
         <h1 class="main-title">Phantom</h1>
-        
         <hr>
         
         <div class="profile">
-            <!-- Проверь, чтобы файл my-photo.jpeg лежал в той же папке -->
             <img src="my-photo.jpeg" alt="Мое фото" width="150">
         </div>
 
-        <!-- Контейнер для карточек (заполняется через JS) -->
         <div class="skills-container"></div>
 
-        <!-- Секция калькулятора -->
-        <section class="calculator-section">
+        <!-- Добавили data-aos прямо в твои секции -->
+        <section class="calculator-section" data-aos="fade-right">
             <div class="calculator">
-                <h3>Мини-калькулятор</h3>
+                <h3>🔢 Мини-калькулятор</h3>
                 <div class="inputs">
                     <input type="number" id="num1" placeholder="Число 1">
                     <input type="number" id="num2" placeholder="Число 2">
@@ -39,35 +41,37 @@
                 <div class="buttons">
                     <button onclick="calculate('+')">+</button>
                     <button onclick="calculate('-')">-</button>
-                    <button onclick="calculate('*')">*</button>
+                    <button onclick="calculate('*')">+</button>
                     <button onclick="calculate('/')">/</button>
                 </div>
                 <h4 id="result">Результат: 0</h4>
             </div>
-            <section class="quote-section">
-                <h3>Цитата дня</h3>
-                <p id="quote-text">Нажми на кнопку, чтобы получить мудрость...</p>
-                <button onclick="getQuote()">Получить цитату</button>
-            </section>            
         </section>
-        <section class="todo-section">
-            <h3>Мои задачи</h3>
+
+        <section class="quote-section" data-aos="zoom-in">
+            <div class="calculator"> <!-- Используем тот же класс для стиля -->
+                <h3>💡 Цитата дня</h3>
+                <p id="quote-text">Нажми на кнопку, чтобы получить мудрость...</p>
+                <button onclick="getQuote()"><i class="fas fa-magic"></i> Получить цитату</button>
+            </div>
+        </section>
+
+        <section class="todo-section" data-aos="fade-left">
+            <h3>✅ Мои задачи</h3>
             <div class="todo-input-group">
                 <input type="text" id="todo-input" placeholder="Что нужно сделать?">
                 <button onclick="addTask()">Добавить</button>
             </div>
-            <ul id="todo-list">
-                <!-- Сюда будут падать задачи -->
-            </ul>
+            <ul id="todo-list"></ul>
         </section>
         
-        <section class="about">
+        <section class="about" data-aos="fade-up">
             <p>Я будущий <strong>веб-разработчик</strong>. Сейчас я прохожу обучение с наставником.</p>
             <p><a href="https://t.me/phantom_1912" target="_blank" rel="noopener">✈️ Мой телеграм</a></p>
         </section>
 
-        <section class="goals">
-            <h3>Мои цели на этот курс:</h3>
+        <section class="goals" data-aos="flip-up">
+            <h3>🎯 Мои цели на этот курс:</h3>
             <ul>
                 <li>Научиться верстать сайты</li>
                 <li>Понять, как работает JavaScript</li>
@@ -76,6 +80,8 @@
         </section>
     </main>
 
+    <!-- 3. ПОДКЛЮЧАЕМ СКРИПТ АНИМАЦИИ AOS (Исправлено) -->
+    <script src="https://unpkg.com"></script>
     <script src="script.js"></script>
 </body>
 </html>

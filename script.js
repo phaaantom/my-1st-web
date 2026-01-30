@@ -1,3 +1,4 @@
+AOS.init();
 // 1. ФУНКЦИИ ДЛЯ КНОПОК (Глобальные)
 function calculate(operator) {
     const n1 = parseFloat(document.getElementById('num1').value);
