@@ -132,4 +132,24 @@ if (container) {
         document.body.style.color = isDark ? '#000' : '#fff';
     };
 });
+async function getQuote() {
+    const quoteElement = document.getElementById('quote-text');
+    quoteElement.textContent = "Загрузка мудрости...";
+
+    try {
+        // Официант (fetch) пошел на кухню (API) за заказом
+        const response = await fetch('https://api.quotable.io');
+        
+        // Превращаем ответ в понятный JS объект
+        const data = await response.json();
+        
+        // Выводим цитату на экран (data.content - это текст цитаты)
+        quoteElement.textContent = `"${data.content}" — ${data.author}`;
+        
+    } catch (error) {
+        // Если интернет пропал или кухня закрыта
+        quoteElement.textContent = "Упс! Мудрость временно недоступна.";
+        console.error("Ошибка API:", error);
+    }
+}
 
